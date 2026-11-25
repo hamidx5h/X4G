@@ -8,20 +8,6 @@ from datetime import datetime
 
 from fastapi import WebSocket, WebSocketDisconnect
 
-from main import (
-    LINKS,
-    LINKS_LOCK,
-    stats,
-    hourly_traffic,
-    connections,
-    error_logs,
-    logger,
-    is_link_allowed,
-    is_ip_allowed,
-    save_state,
-    log_activity,
-    now_ir,
-)
 from speed_limit import throttle
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -212,3 +198,19 @@ async def websocket_tunnel(ws: WebSocket, uuid: str):
                 pass
         connections.pop(conn_id, None)
         logger.info(f"🔌 WS closed [{conn_id}] total={len(connections)}")
+
+# ایمپورت از main در انتهای فایل انجام می‌شود تا ایمپورت چرخه‌ای (main -> relay_vless -> main) هنگام اجرای python main.py باعث ImportError نشود؛ نام‌های زیر فقط داخل توابع استفاده می‌شوند.
+from main import (
+    LINKS,
+    LINKS_LOCK,
+    stats,
+    hourly_traffic,
+    connections,
+    error_logs,
+    logger,
+    is_link_allowed,
+    is_ip_allowed,
+    save_state,
+    log_activity,
+    now_ir,
+)
