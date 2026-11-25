@@ -8,8 +8,6 @@ from datetime import datetime
 
 from fastapi import WebSocket, WebSocketDisconnect
 
-from speed_limit import throttle
-
 # ══════════════════════════════════════════════════════════════════════════════
 # VLESS Relay — بهینه‌شده برای حداکثر throughput
 # ══════════════════════════════════════════════════════════════════════════════
@@ -214,3 +212,4 @@ from main import (
     log_activity,
     now_ir,
 )
+from speed_limit import throttle
